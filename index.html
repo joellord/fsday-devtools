@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <ul id="todo-list"></ul>
+    <form id="todo-form">
+      <input type="text" id="todo-input" />
+      <button id="todo-btn" type="submit">Add</button>
+    </form>
+  </body>
+
+<script type="text/javascript">
+let todos = [
+  { id: 1, text: 'Learn JavaScript' },
+  { id: 2, text: 'Learn React' },
+  { id: 3, text: 'Build a todo app' }
+];
+
+let submitBtn = document.querySelector('#todo-btn');
+let todoInput = document.querySelector('#todo-input');
+
+submitBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  let todo = {
+    id: Date.now(),
+    text: todoInput.value,
+    complete: false
+  };
+  todos.push(todo);
+  renderTodos(todos);
+  todoInput.innerHTML = '';
+});
+
+function renderTodos(todos) {
+  let todoList = document.querySelector('#todo-list');
+  todoList.innerHTML = '';
+  todos.forEach(function(todo) {
+    let todoItem = document.createElement('li');
+    todoItem.innerHTML = todo.text;
+    todoList.appendChild(todoItem);
+  });
+}
+
+renderTodos(todos);
+
+</script>
+</html>
